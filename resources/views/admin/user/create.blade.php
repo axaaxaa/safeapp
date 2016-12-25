@@ -3,6 +3,16 @@
     <div class="page-title">
         <h3 class="title"><font><font>添加用户</font></font></h3>
     </div>
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <p>格式错误，请重新添加</p>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
