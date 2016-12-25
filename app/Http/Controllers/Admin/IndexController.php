@@ -12,10 +12,20 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private static $adminStore;
+    private static $userStore;
+    public function __construct(AdminStore $adminStore, UserStore $userStore)
+    {
+        self::$adminStore = $adminStore;
+        self::$userStore = $userStore;
+    }
+
+
     public function index()
     {
         //
-        return view('admin.index');
+        $users = self::$userStore->findAllUser();
+        return view('admin.index',['userList' => $users]);
     }
 
     /**

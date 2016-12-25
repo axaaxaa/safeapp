@@ -27,4 +27,8 @@ class UserModel
     public function getOfAll(){
         return DB::table('data_users')->get();
     }
+
+    public function update($data,$guid){
+        return DB::table('data_users')->where('guid',$guid)->update($data);
+    }
 }

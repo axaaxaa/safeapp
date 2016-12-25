@@ -171,4 +171,14 @@ class UserStore
         return $modelCourseAll;
     }
 
+    /*
+     * 修改用户数据
+     */
+    public function update($data, $id){
+        //1.数据过滤
+        if(empty($data) || empty($id))
+            return false;
+        return self::$userModel->update($data, $id);
+    }
+
 }

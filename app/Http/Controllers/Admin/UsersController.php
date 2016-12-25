@@ -86,6 +86,9 @@ class UsersController extends Controller
     public function edit($id)
     {
         //
+        $users = self::$userStore->findAllUser();
+        $userInfo = self::$userStore->findByGuid($id);
+        return view('admin.user.edit',['userInfo'=>$userInfo,'classList' => $users]);
     }
 
     /**
@@ -98,6 +101,23 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'username' => 'required',
+            'phone' => 'required | max:11 | min:11',
+            'email' => 'required'
+        ]);
+
+        $data = $request->all();
+        $update = [
+            'username' => $data['username'],
+            'phone' => $data['phone'],
+            'email' => $data['email'],
+        ];
+        $result = self::$userStore->update($update, $id);
+        if (empty($result)){
+            return back();
+        }
+        return redirect('/user');
     }
 
     /**
