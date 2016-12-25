@@ -1,0 +1,156 @@
+body, html {
+  height: 100%;
+  -webkit-tap-highlight-color: transparent;
+  font-family: "微软雅黑";
+}
+
+footer {
+  text-align: center;
+  font-size: 14px;
+  padding: 20px;
+}
+
+footer a {
+  color: #999;
+  text-decoration: none;
+}
+
+.mall-title {
+  text-align: center;
+  font-size: 28px;
+  color: #3cc51f;
+  font-weight: 400;
+  margin: 0 15%;
+}
+
+.mall-title {
+  text-align: center;
+  font-size: 24px;
+  color: #fff;
+  font-weight: 400;
+  -margin: 0 15%;
+}
+
+.mall-sub-title {
+  text-align: center;
+  color: #888;
+  font-size: 12px;
+}
+
+.mall-header {
+	background: #19b507;
+  	padding: 6px 0;
+  	height: 40px; 
+}
+
+.mall-content-padded {
+  padding: 15px;
+}
+
+.mall-second-title {
+  text-align: center;
+  font-size: 24px;
+  color: #3cc51f;
+  font-weight: 400;
+  margin: 0 15%;
+}
+
+.mall-back{
+  position: absolute;
+  top: 0; 
+  left: 0;
+  padding: 10px;
+}
+
+.mall-login{
+	position: absolute;
+	top: 0; 
+	right: 0;
+  padding: 12px;
+}
+.mall-login img, .mall-back img{
+  width: 26px;
+}
+
+/* 商品列表页 */
+/* 九宫格 比例改变 */
+.weui_grid{
+  width: 46%;
+  height: 270px;
+  margin:2%;
+  border: 1px solid #ddd;
+}
+
+.weui_grid img{
+  width: 100%;
+}
+
+.weui_grid_icon{
+  width: 100%; 
+  height: 140px;
+}
+
+.mall_grid_title{
+  color: #333333;
+  font-size: 16px;
+  text-align: center;
+  height: 30px;
+  white-space:nowrap; 
+  overflow:hidden; 
+  text-overflow:ellipsis;
+}
+
+.mall_grid_info{
+  font-size: 14px;
+  color: #404040;
+  height: 45px;
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  margin-bottom: 2px;
+}
+
+.mall_grid_price{
+  color: #ED185E;
+  font-size: 15px;
+}
+
+.mall_grid_price span{
+  margin-right: 8px;
+}
+
+.mall_grid_price span:last-child{
+  font-size: 16px;
+}
+
+
+/* 商品详情页 */
+.item_detail{}
+.item_img{ 
+  height: 200px;
+  margin: 0 auto;
+  display: block;  
+}
+.item_detail .weui_cell_bd{
+  color: #ED145B;
+}
+.description{
+  padding: 20px;
+}
+.item_info{}
+.item_info img{
+  width: 100%;
+}
+
+
+/* phone */
+.mall_phone{ margin-top: 200px;}
+
+/* 个人中心页 */
+.mall_area{  }
+.mall_headpic{ width: 140px; height: 140px; margin:0 auto; border-radius: 50%; overflow: hidden; }
+.mall_headpic img{ width: 100%; }
+.mall_cell_bd{ text-align: left; text-indent: 1em; }
+
+/* 登录页面 */
+button.weui_btn, input.weui_btn{ width: 80%;}
+

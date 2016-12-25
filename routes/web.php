@@ -11,6 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::resource('/test', 'TestController');
+
+Route::group(['domain' => "www.safeapp.com", "namespace" => "User"],function(){
+    route::resource('/login', 'LoginController');
+    route::resource('/register', 'RegisterController');
+    route::group(['middleware' => 'UserMiddleware'],function(){
+        route::resource('/', 'IndexController');
+    });
+});
+
+Route::group(['domain' => "admin.safeapp.com", "namespace" => "Admin"],function(){
+    Route::get('/tests', function(){
+        dd('admin test');
+    });
 });
