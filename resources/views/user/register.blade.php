@@ -22,15 +22,22 @@
 </header>
 
 <div class="content">
-
-
+    @if(!empty($msg))
+        <div class="alert alert-danger">
+            <ul>
+                <li>
+                    {{ $registerMsg }}
+                </li>
+            </ul>
+        </div>
+    @endif
 
     <div class="mall_phone">
         <form action="/user" method="post">
             {{ csrf_field() }}
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input"  id = 'tel' type="text" name="tel" placeholder="请输入手机号">
+                    <input class="weui_input"  id = 'tel' type="text" name="user_info" placeholder="请输入手机号">
                 </div>
                 <div class="weui_cell_ft">
                     <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>">

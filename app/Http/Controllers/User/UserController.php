@@ -27,6 +27,7 @@ class UserController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -49,7 +50,17 @@ class UserController extends Controller
     {
         //
         $data = $request->all();
-        if(empty($data['tel'])) return back();
+
+        //1.数据过滤
+        if(empty($data['user_info'])) return back();
+
+        //2.判断用户是否已存在
+        $result = self::$userStore->findUser($data);
+
+        if (!empty($result)){
+            return view('user.login', ['status' => '101', 'msg' => '您已注册，请登录']);
+        }
+
         $code = Redis::get('TEL:'.$data['tel']);
         if($code != $data['code']){
             return back();

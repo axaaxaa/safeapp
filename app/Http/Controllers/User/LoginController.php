@@ -50,7 +50,6 @@ class LoginController extends Controller
         $data = $request->all();
         $result = self::$userStore->login($data);
         if ($result['status'] == '200'){
-            dd(111);
             return redirect('/');
         }
         return back()->withInput()->with('errorMsg', $result);

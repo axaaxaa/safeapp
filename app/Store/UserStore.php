@@ -32,10 +32,7 @@ class UserStore
         ];
 
         //2.判断Redis是否存在用户//2.查询hash
-//        $redisC= Redis::HGetAll($this->hashKey.$courseId);
-
         //3.判断用户以那种方式登录，a.手机号 b.邮箱 c.用户名
-        $type = $data['user_info'];
         if (preg_match("/^(1(([35][0-9])|(47)|[8][0126789]))\d{8}$/", $data['user_info'])){
             $where = [
                 'phone' => $data['user_info'],
@@ -54,8 +51,27 @@ class UserStore
             return ['status' => '404', 'msg' => '登录失败，用户名与密码不匹配'];
         Session::set('user', $result);
         return ['status' => '200', 'msg' => ''];
-        dd($where);
-        dd($data);
+    }
+
+    public function findUser($data){
+        //1. 数据过滤
+        if (empty($data) || empty($data['user_info']))
+            return false;
+        $where = [
+            'username' => $data['user_info']
+        ];
+        if (preg_match("/^(1(([35][0-9])|(47)|[8][0126789]))\d{8}$/", $data['user_info'])){
+            $where = [
+                'phone' => $data['user_info']
+            ];
+        }
+        if (preg_match("/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i",$data['user_info'])){
+            $where = [
+                'email' => $data['user_info']
+            ];
+        }
+        $result = self::$userModel->findUser($where);
+        return $result;
     }
 
     public function findByGuid($guid){

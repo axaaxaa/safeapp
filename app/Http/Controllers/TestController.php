@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Nette\Mail\Message;
 use Nette\Mail\SendmailMailer;
+use Illuminate\Support\Facades\Redis;
 
 class TestController extends Controller
 {
@@ -15,8 +16,10 @@ class TestController extends Controller
      */
     public function index()
     {
+        $data = Redis::lrange("LIST:User:UserId",0,-1);
+        dd($data);
         //
-        $mail = new Message;
+        /*$mail = new Message;
         $mail->setFrom('Michelle <lilian1131@163.com>')
             ->addTo('axaaxaa@163.com')
             ->addTo('929407250@qq.com')
@@ -24,7 +27,7 @@ class TestController extends Controller
             ->setBody("Hello, Your order has been accepted.");
         $mailer = new SendmailMailer;
         $result = $mailer->send($mail);
-        dd($result);
+        dd($result);*/
     }
 
     /**
