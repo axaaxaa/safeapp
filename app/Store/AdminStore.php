@@ -10,6 +10,7 @@
 namespace App\Store;
 
 use App\Model\AdminModel;
+use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redis;
 
@@ -75,22 +76,4 @@ class AdminStore
         return $redisOne;
     }
 
-    public function create($create){
-        //1. 数据验证
-        if(empty($create) || empty($create['guid']) ||empty($create['phone'])){
-            dd($create);
-            return false;
-        }
-
-        //2. 插入数据库
-        $result = self::$adminModel->create($create);
-
-        if(empty($result)) return false;
-
-        //3. 添加缓存
-        Redis::Lpush($this->indexCourseId,$create['guid']);
-        $redisOne = $this->findByGuid($create['guid']);
-
-        return $redisOne;
-    }
 }

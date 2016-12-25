@@ -11,6 +11,7 @@ namespace App\Store;
 use App\Model\UserModel;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redis;
+use Ramsey\Uuid\Uuid;
 
 class UserStore
 {
@@ -117,6 +118,18 @@ class UserStore
         return $redisOne;
     }
 
+    public function createByAdmin($create){
+        //1. 数据验证
+        if(empty($create) || empty($create['username']) ||
+            empty($create['phone']) || empty($create['email'])){
+            return false;
+        }
+
+        //2. 插入数据库
+        $result = self::$userModel->create($create);
+        return $result;
+    }
+
     /*
      * 查询所有用户
      */
@@ -149,6 +162,11 @@ class UserStore
     }
 
     public function findAllUser(){
+        $modelCourseAll = self::$userModel->getOfAll();
+        return $modelCourseAll;
+    }
+
+    public function findAllByAdmin(){
         $modelCourseAll = self::$userModel->getOfAll();
         return $modelCourseAll;
     }

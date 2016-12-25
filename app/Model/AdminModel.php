@@ -23,4 +23,5 @@ class AdminModel
     public function create($create){
         return DB::table('data_admin')->insertGetId($create);
     }
+
 }

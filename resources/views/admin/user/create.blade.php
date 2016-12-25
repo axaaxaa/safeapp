@@ -20,19 +20,19 @@
                             <div class="form-group ">
                                 <label for="cemail" class="control-label col-lg-2"><font><font>手机号</font></font></label>
                                 <div class="col-lg-10">
-                                    <input class="form-control " id="cemail" type="text" name="tel" required="" aria-required="true">
+                                    <input class="form-control " id="cemail" type="text" name="phone" required="" aria-required="true">
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <label for="curl" class="control-label col-lg-2"><font><font>password</font></font></label>
+                                <label for="curl" class="control-label col-lg-2"><font><font>邮箱</font></font></label>
+                                <div class="col-lg-10">
+                                    <input class="form-control " id="curl" type="url" name="email">
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="curl" class="control-label col-lg-2"><font><font>密码</font></font></label>
                                 <div class="col-lg-10">
                                     <input class="form-control " id="curl" type="url" name="password">
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <label for="ccomment" class="control-label col-lg-2"><font><font>pic</font></font></label>
-                                <div class="col-lg-10">
-                                    <input class="form-control " type="file" id="curl" type="url" name="pic">
                                 </div>
                             </div>
                             <div class="form-group">

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Store\AdminStore;
 use App\Store\UserStore;
+use Ramsey\Uuid\Uuid;
 
 class UsersController extends Controller
 {
@@ -14,9 +16,11 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    private static $adminStore;
     private static $userStore;
-    public function __construct(UserStore $userStore)
+    public function __construct(AdminStore $adminStore, UserStore $userStore)
     {
+        self::$adminStore = $adminStore;
         self::$userStore = $userStore;
     }
 
@@ -47,7 +51,19 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $create = [
+            'guid' => Uuid::uuid1()->getHex(),
+            'username' => $data['username'],
+            'phone' => $data['phone'],
+            'email' => $data['email'],
+            'password' => md5($data['email'].'limingxia')
+        ];
+        $result = self::$userStore->createByAdmin($create);
+        if(empty($result)){
+            return back();
+        }
+        return redirect('/user');
     }
 
     /**
