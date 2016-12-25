@@ -8,9 +8,17 @@ use Flc\Alidayu\Client;
 use Flc\Alidayu\App;
 use Flc\Alidayu\Requests\AlibabaAliqinFcSmsNumSend;
 use Config;
+use Illuminate\Support\Facades\Redis;
+use App\Store\UserStore;
+use Ramsey\Uuid\Uuid;
 
 class UserController extends Controller
 {
+    private static $userStore;
+    public function __construct(UserStore $userStore)
+    {
+        self::$userStore = $userStore;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,6 +48,23 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->all();
+        if(empty($data['tel'])) return back();
+        $code = Redis::get('TEL:'.$data['tel']);
+        if($code != $data['code']){
+            return back();
+        }
+        $uuid = Uuid::uuid1()->getHex();
+        $create = [
+            'guid' => $uuid,
+            'phone' => $data['tel']
+        ];
+        $userInfo = self::$userStore->create($create);
+        if(empty($userInfo)){
+            return back();
+        }else{
+            return redirect($data['path']);
+        }
     }
 
     /**
@@ -92,15 +117,14 @@ class UserController extends Controller
      */
     public function sendcode(Request $request){
 
-
-
         $config = [
             'app_key'    => Config::get('alisms.app_key'),
             'app_secret' => Config::get('alisms.app_secret'),
         ];
         $data = $request->all();
         $tel = $data['phone'];
-
+        $code = rand(100000, 999999);
+        Redis::setex('TEL:'.$tel,180,$code);
         // 数据过滤
         if(empty($data['phone']))   return false;
 
@@ -109,13 +133,12 @@ class UserController extends Controller
 
         $req->setRecNum($tel)
             ->setSmsParam([
-                'code' => rand(100000, 999999)
+                'code' => $code
             ])
             ->setSmsFreeSignName('孙健魁')
             ->setSmsTemplateCode('SMS_27590030');
 
         $result = $client->execute($req);
-
 
         return response()->json(['smsResult'=>$result]);
 

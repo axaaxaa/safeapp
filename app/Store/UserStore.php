@@ -10,6 +10,7 @@
 namespace App\Store;
 use App\Model\UserModel;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redis;
 
 class UserStore
 {
@@ -49,10 +50,8 @@ class UserStore
             ];
         }
         $result = self::$userModel->findUser($where);
-//        dd(self::$userModel->findByGuid($result->guid));
         if (empty($result))
             return ['status' => '404', 'msg' => '登录失败，用户名与密码不匹配'];
-//                return view('',['msg' => '登录失败，手机号与密码不匹配']);
         Session::set('user', $result);
         return ['status' => '200', 'msg' => ''];
         dd($where);
@@ -69,7 +68,7 @@ class UserStore
 
         //3.查询数据库
         if(empty($redisOne)){
-            $modelOne = $this->dataCourseModel->findByCourseId($guid);
+            $modelOne = self::$userModel->findByGuid($guid);
 
             if(empty($modelOne)) return false;
 
@@ -79,6 +78,25 @@ class UserStore
 
             return $modelOne;
         }
+
+        return $redisOne;
+    }
+
+    public function create($create){
+        //1. 数据验证
+        if(empty($create) || empty($create['guid']) ||empty($create['phone'])){
+            dd($create);
+            return false;
+        }
+
+        //2. 插入数据库
+        $result = self::$userModel->create($create);
+
+        if(empty($result)) return false;
+
+        //3. 添加缓存
+        Redis::Lpush($this->indexCourseId,$create['guid']);
+        $redisOne = $this->findByGuid($create['guid']);
 
         return $redisOne;
     }

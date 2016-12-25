@@ -26,11 +26,11 @@
 
 
     <div class="mall_phone">
-        <form action="/sendcode" method="post">
+        <form action="/user" method="post">
             {{ csrf_field() }}
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input"  id = 'tel' type="text" name="tel" placeholder="请输入用户名，手机号，邮箱">
+                    <input class="weui_input"  id = 'tel' type="text" name="tel" placeholder="请输入手机号">
                 </div>
                 <div class="weui_cell_ft">
                     <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>">
@@ -76,11 +76,11 @@
             return 0;
         }
 
-//        var tel = $('#tel').val();
         var param = {
             "phone" : $('#tel').val(),
-            "_token" : $('#_token').val()
         }
+        console.log(param);
+
         if(param.phone.length<11){
             alert('请正确输入手机号');
         }
@@ -91,8 +91,8 @@
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                sendcode();
-                if (data.smsResult.result.success){
+                    sendcode();
+                    if (data.smsResult.result.success){
                     alert('发送成功');
                 }else{
                     alert('发送失败');

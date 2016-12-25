@@ -17,9 +17,10 @@ class UserModel
     }
 
     public function findByGuid($guid){
+        return DB::table('data_users')->where('guid',$guid)->first();
+    }
 
-        $result = DB::table('data_users')->where('guid',$guid)->first();
-
-        return $result;
+    public function create($create){
+        return DB::table('data_users')->insertGetId($create);
     }
 }
