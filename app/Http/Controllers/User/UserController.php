@@ -4,8 +4,12 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Flc\Alidayu\Client;
+use Flc\Alidayu\App;
+use Flc\Alidayu\Requests\AlibabaAliqinFcSmsNumSend;
+use Config;
 
-class RegisterController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +19,6 @@ class RegisterController extends Controller
     public function index()
     {
         //
-        return view('user.register');
     }
 
     /**
@@ -82,5 +85,39 @@ class RegisterController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /*
+     * 发送阿里大于验证码
+     */
+    public function sendcode(Request $request){
+
+
+
+        $config = [
+            'app_key'    => Config::get('alisms.app_key'),
+            'app_secret' => Config::get('alisms.app_secret'),
+        ];
+        $data = $request->all();
+        $tel = $data['phone'];
+
+        // 数据过滤
+        if(empty($data['phone']))   return false;
+
+        $client = new Client(new App($config));
+        $req    = new AlibabaAliqinFcSmsNumSend;
+
+        $req->setRecNum($tel)
+            ->setSmsParam([
+                'code' => rand(100000, 999999)
+            ])
+            ->setSmsFreeSignName('孙健魁')
+            ->setSmsTemplateCode('SMS_27590030');
+
+        $result = $client->execute($req);
+
+
+        return response()->json(['smsResult'=>$result]);
+
     }
 }

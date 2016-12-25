@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a07a913bca72af38aa1a4dbb93522666",
-    "content-hash": "ade26c6a826a5ef08328f4c58ac6d6ec",
+    "hash": "4eb86450ba1fb8464c4a83d1fa883687",
+    "content-hash": "1f673d880b443846f93dbe737c658259",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -160,6 +160,40 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "flc/alidayu",
+            "version": "v2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flc1125/alidayu.git",
+                "reference": "866158461c61b33305b92116e7b8353207f37872"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flc1125/alidayu/zipball/866158461c61b33305b92116e7b8353207f37872",
+                "reference": "866158461c61b33305b92116e7b8353207f37872",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Flc\\Alidayu\\": "src/Alidayu/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "叶子坑 - 阿里大于API",
+            "keywords": [
+                "alidayu",
+                "flc"
+            ],
+            "time": "2016-10-25 10:35:33"
         },
         {
             "name": "jakub-onderka/php-console-color",

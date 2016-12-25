@@ -18,6 +18,8 @@ Route::group(['domain' => "www.safeapp.com", "namespace" => "User"],function(){
     route::resource('/register', 'RegisterController');
     route::group(['middleware' => 'UserMiddleware'],function(){
         route::resource('/', 'IndexController');
+        Route::get('/sendcode', 'UserController@sendcode');
+//        Route::post('/sendcode', 'UserController@sendcode');
     });
 });
 

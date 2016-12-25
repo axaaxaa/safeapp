@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>微商城</title>
+    <title>用户注册</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -18,10 +18,13 @@
 <!-- 头部 -->
 <header class='mall-header'>
     <a class="mall-back" href="index.html"><img src="http://ogjfxbd4v.bkt.clouddn.com/icon_nav_back.png"></a>
-    <h1 class="mall-title">用户登录</h1>
+    <h1 class="mall-title">用户注册</h1>
 </header>
 
 <div class="content">
+
+
+
     <div class="mall_phone">
         <form action="/sendcode" method="post">
             {{ csrf_field() }}
@@ -30,6 +33,7 @@
                     <input class="weui_input"  id = 'tel' type="text" name="tel" placeholder="请输入用户名，手机号，邮箱">
                 </div>
                 <div class="weui_cell_ft">
+                    <input type="hidden" id="_token" name="_token" value="<?php echo csrf_token(); ?>">
                     <a href="javascript:;" class="weui_btn weui_btn_plain_primary sendcode">获取验证码</a>
                 </div>
             </div>
@@ -59,12 +63,59 @@
         font-size: 28px;
         color: #09BB07;
     }
+
 </style>
 
 
 <script src="./dist/lib/jquery-2.1.4.js"></script>
 <script src="./dist/js/jquery-weui.js"></script>
+<script>
+    var time = 60;
+    $('.sendcode').click(function () {
+        if((time > 0) && (time < 60)) {
+            return 0;
+        }
 
+//        var tel = $('#tel').val();
+        var param = {
+            "phone" : $('#tel').val(),
+            "_token" : $('#_token').val()
+        }
+        if(param.phone.length<11){
+            alert('请正确输入手机号');
+        }
+        $.ajax({
+            url: "http://www.safeapp.com/sendcode",
+            type: "get",
+            data: param,
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                sendcode();
+                if (data.smsResult.result.success){
+                    alert('发送成功');
+                }else{
+                    alert('发送失败');
+                }
+            }
+        });
+    });
+
+    function sendcode(){
+        clearInterval(timer);
+        var timer = setInterval(function(){
+            if (time < 0) {
+                clearInterval(timer);
+                $(".sendcode").html("重新获取").removeClass("weui_btn_disabled");
+                time = 60;
+                return 0;
+            }
+            $(".sendcode").html(time + 's').addClass("weui_btn_disabled");
+            time--;
+        },1000);
+    }
+
+</script>
 </body>
 
 </html>
