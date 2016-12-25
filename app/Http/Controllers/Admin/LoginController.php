@@ -4,18 +4,26 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Store\AdminStore;
 
-class IndexController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    private static $adminStore;
+    public function __construct(AdminStore $adminStore)
+    {
+        self::$adminStore = $adminStore;
+    }
+
     public function index()
     {
         //
-        return view('admin.index');
+        return view('admin.login');
     }
 
     /**
@@ -37,6 +45,12 @@ class IndexController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->all();
+        $result = self::$adminStore->login($data);
+        if ($result['status'] == '200'){
+            return redirect('/');
+        }
+        return back()->withInput()->with('errorMsg', $result);
     }
 
     /**

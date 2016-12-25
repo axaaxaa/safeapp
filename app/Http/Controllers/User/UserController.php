@@ -61,14 +61,14 @@ class UserController extends Controller
             return view('user.login', ['status' => '101', 'msg' => '您已注册，请登录']);
         }
 
-        $code = Redis::get('TEL:'.$data['tel']);
+        $code = Redis::get('TEL:'.$data['user_info']);
         if($code != $data['code']){
             return back();
         }
         $uuid = Uuid::uuid1()->getHex();
         $create = [
             'guid' => $uuid,
-            'phone' => $data['tel']
+            'phone' => $data['user_info']
         ];
         $userInfo = self::$userStore->create($create);
         if(empty($userInfo)){

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Nette\Mail\Message;
 use Nette\Mail\SendmailMailer;
 use Illuminate\Support\Facades\Redis;
-
+use DB;
 class TestController extends Controller
 {
     /**
@@ -16,6 +16,8 @@ class TestController extends Controller
      */
     public function index()
     {
+        dd(DB::table('data_users')->get());
+
         $data = Redis::lrange("LIST:User:UserId",0,-1);
         dd($data);
         //

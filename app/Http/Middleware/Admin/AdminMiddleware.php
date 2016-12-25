@@ -3,6 +3,7 @@
 namespace App\Http\Middleware\Admin;
 
 use Closure;
+use Illuminate\Support\Facades\Session;
 
 class AdminMiddleware
 {
@@ -15,6 +16,9 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if(empty(Session::get('admin'))){
+            return redirect('/login');
+        }
         return $next($request);
     }
 }

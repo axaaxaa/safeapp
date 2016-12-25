@@ -4,18 +4,28 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Store\UserStore;
 
-class IndexController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    private static $userStore;
+    public function __construct(UserStore $userStore)
+    {
+        self::$userStore = $userStore;
+    }
+
+
     public function index()
     {
         //
-        return view('admin.index');
+        $users = self::$userStore->findAllUser();
+        return view('admin.user.index',['userList' => $users]);
     }
 
     /**
@@ -26,6 +36,7 @@ class IndexController extends Controller
     public function create()
     {
         //
+        return view('admin.user.create');
     }
 
     /**

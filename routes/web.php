@@ -24,11 +24,9 @@ Route::group(['domain' => "www.safeapp.com", "namespace" => "User"],function(){
 });
 
 Route::group(['domain' => "admin.safeapp.com", "namespace" => "Admin"],function(){
-    Route::get('/', function(){
-        dd('admin test');
-    });
     route::resource('/login', 'LoginController');
     route::group(['middleware' => 'AdminMiddleware'],function(){
         route::resource('/', 'IndexController');
+        route::resource('/user', 'UsersController');
     });
 });

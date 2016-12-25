@@ -116,4 +116,41 @@ class UserStore
 
         return $redisOne;
     }
+
+    /*
+     * 查询所有用户
+     */
+    public function findAll(){
+
+        //2. 查询list
+        $RedisCourseAll = Redis::LRange($this->indexCourseId, 0, -1);
+
+        if (empty($RedisCourseAll)){
+
+            $modelCourseAll = self::$userModel->getOfAll();
+            if(empty($modelCourseAll)) return false;
+
+            $RedisCourseAll = [];
+            foreach ($modelCourseAll as $course){
+                Redis::Lpush($this->indexCourseId, $course->guid);
+
+                $RedisCourseAll[] = $course->guid;
+            }
+
+        }
+
+        $courseAll = [];
+
+        foreach ($RedisCourseAll as $one) {
+//            $courseAll = $this->findByGuid($one);
+            array_push($courseAll, $this->findByGuid($one));
+        }
+        return $courseAll;
+    }
+
+    public function findAllUser(){
+        $modelCourseAll = self::$userModel->getOfAll();
+        return $modelCourseAll;
+    }
+
 }

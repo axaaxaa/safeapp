@@ -23,4 +23,8 @@ class UserModel
     public function create($create){
         return DB::table('data_users')->insertGetId($create);
     }
+
+    public function getOfAll(){
+        return DB::table('data_users')->get();
+    }
 }
