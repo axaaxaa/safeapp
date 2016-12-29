@@ -24,6 +24,7 @@ class AdminStore
         self::$adminModel = $adminModel;
     }
     public function login($data){
+
         //1. 数据过滤
         if (empty($data) || empty($data['user_info']) || empty($data['password']))
             return false;
@@ -32,7 +33,6 @@ class AdminStore
             'username' => $data['user_info'],
             'password' => $password,
         ];
-
         $result = self::$adminModel->findUser($where);
         if (empty($result))
             return ['status' => '404', 'msg' => '登录失败，用户名与密码不匹配'];

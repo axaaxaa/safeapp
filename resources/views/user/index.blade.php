@@ -17,8 +17,9 @@
 
 <!-- 头部 -->
 <header class='mall-header'>
+    <a class="mall-back" style="color: #ffffff" href="/logout">退出</a>
     <h1 class="mall-title">Jubar</h1>
-    <a class="mall-login" href="login.html"><img src="./images/icon_nav_headpic.png"></a>
+    <a class="mall-login" href="javascript:;"><img src="./images/icon_nav_headpic.png"></a>
 </header>
 
 <div class="content">

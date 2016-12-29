@@ -154,4 +154,12 @@ class UserController extends Controller
         return response()->json(['smsResult'=>$result]);
 
     }
+    /**
+     * 用户退出登录
+     */
+    public static function logout(Request $request)
+    {
+        $request->session()->forget('user');
+        return view('user.login');
+    }
 }

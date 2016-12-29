@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Store\AdminStore;
+use App\Store\UserStore;
 
 class IndexController extends Controller
 {

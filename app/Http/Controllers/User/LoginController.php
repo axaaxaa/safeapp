@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use App\Store\UserStore;
 
 class LoginController extends Controller
 {
@@ -99,4 +100,5 @@ class LoginController extends Controller
     {
         //
     }
+
 }

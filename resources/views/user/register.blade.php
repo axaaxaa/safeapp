@@ -17,7 +17,7 @@
 
 <!-- 头部 -->
 <header class='mall-header'>
-    <a class="mall-back" href="index.html"><img src="http://ogjfxbd4v.bkt.clouddn.com/icon_nav_back.png"></a>
+    <a class="mall-back" href="/login"><img src="http://ogjfxbd4v.bkt.clouddn.com/icon_nav_back.png"></a>
     <h1 class="mall-title">用户注册</h1>
 </header>
 

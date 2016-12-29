@@ -7,6 +7,7 @@ Route::group(['domain' => "www.safeapp.com", "namespace" => "User"],function(){
         route::resource('/', 'IndexController');
         route::resource('/user', 'UserController');
         Route::get('/sendcode', 'UserController@sendcode');
+        Route::get('/logout', 'UserController@logout');
     });
 });
 

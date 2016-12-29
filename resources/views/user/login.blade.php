@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>微商城</title>
+    <title>Jubar</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -20,7 +20,7 @@
 
 <!-- 头部 -->
 <header class='mall-header'>
-    <a class="mall-back" href="index.html"><img src="http://ogjfxbd4v.bkt.clouddn.com/icon_nav_back.png"></a>
+    <a class="mall-back" href="javascript:;"><img src="http://ogjfxbd4v.bkt.clouddn.com/icon_nav_back.png"></a>
     <h1 class="mall-title">用户登录</h1>
 </header>
 <div class="content">
@@ -51,6 +51,7 @@
                 </div>
             </div>
             <input type="submit" class="weui_btn weui_btn_primary mall_btn_login" value="提交">
+            <a href="/register" style="width: 80%; background-color: #dddddd" class="weui_btn weui_btn_primary">注册</a>
         </form>
     </div>
 
