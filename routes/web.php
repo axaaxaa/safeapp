@@ -3,10 +3,10 @@
 Route::group(['domain' => "www.safeapp.com", "namespace" => "User"],function(){
     route::resource('/login', 'LoginController');
     route::resource('/register', 'RegisterController');
+    Route::get('/sendcode', 'UserController@sendcode');
     route::group(['middleware' => 'UserMiddleware'],function(){
         route::resource('/', 'IndexController');
         route::resource('/user', 'UserController');
-        Route::get('/sendcode', 'UserController@sendcode');
         Route::get('/logout', 'UserController@logout');
     });
 });

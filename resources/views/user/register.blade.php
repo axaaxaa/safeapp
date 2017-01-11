@@ -33,7 +33,7 @@
     @endif
 
     <div class="mall_phone">
-        <form action="/user" method="post">
+        <form action="/register" method="post">
             {{ csrf_field() }}
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
@@ -86,11 +86,12 @@
         var param = {
             "phone" : $('#tel').val(),
         }
-        console.log(param);
 
         if(param.phone.length<11){
             alert('请正确输入手机号');
+            return false;
         }
+        console.log(param);
         $.ajax({
             url: "http://www.safeapp.com/sendcode",
             type: "get",

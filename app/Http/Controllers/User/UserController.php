@@ -49,8 +49,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $data = $request->all();
 
+        $data = $request->all();
         //1.数据过滤
         if(empty($data['user_info'])) return back();
 
@@ -68,9 +68,11 @@ class UserController extends Controller
         $uuid = Uuid::uuid1()->getHex();
         $create = [
             'guid' => $uuid,
-            'phone' => $data['user_info']
+            'phone' => $data['user_info'],
+            "password" => "e3157b4214ccfd2124a00df8088add31",
         ];
         $userInfo = self::$userStore->create($create);
+        dd($userInfo);
         if(empty($userInfo)){
             return back();
         }else{
@@ -127,7 +129,6 @@ class UserController extends Controller
      * 发送阿里大于验证码
      */
     public function sendcode(Request $request){
-
         $config = [
             'app_key'    => Config::get('alisms.app_key'),
             'app_secret' => Config::get('alisms.app_secret'),
@@ -152,7 +153,6 @@ class UserController extends Controller
         $result = $client->execute($req);
 
         return response()->json(['smsResult'=>$result]);
-
     }
     /**
      * 用户退出登录

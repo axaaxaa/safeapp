@@ -55,6 +55,7 @@ class UserStore
     }
 
     public function findUser($data){
+        var_dump($data);
         //1. 数据过滤
         if (empty($data) || empty($data['user_info']))
             return false;
@@ -72,6 +73,8 @@ class UserStore
             ];
         }
         $result = self::$userModel->findUser($where);
+
+
         return $result;
     }
 

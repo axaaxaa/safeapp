@@ -13,6 +13,8 @@ use DB;
 class UserModel
 {
     public function findUser($where){
+        var_dump('3333');
+        var_dump(DB::table('data_users')->where($where)->first());
         return DB::table('data_users')->where($where)->first();
     }
 

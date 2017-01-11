@@ -4,9 +4,20 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Store\UserStore;
+use Ramsey\Uuid\Uuid;
+use App\Store\AdminStore;
+use Illuminate\Support\Facades\Redis;
 class RegisterController extends Controller
 {
+
+    private static $adminStore;
+    private static $userStore;
+    public function __construct(AdminStore $adminStore, UserStore $userStore)
+    {
+        self::$adminStore = $adminStore;
+        self::$userStore = $userStore;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,6 +48,32 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->all();
+        var_dump($data);
+        //1.数据过滤
+        if(empty($data['user_info'])) return back();
+        //2.判断用户是否已存在
+        $result = self::$userStore->findUser($data);
+//        dd($result);
+        if (!empty($result)){
+            return view('user.login', ['status' => '101', 'msg' => '您已注册，请登录']);
+        }
+
+        $code = Redis::get('TEL:'.$data['user_info']);
+        if($code != $data['code']){
+            return back();
+        }
+        $uuid = Uuid::uuid1()->getHex();
+        $create = [
+            'guid' => $uuid,
+            'phone' => $data['user_info'],
+        ];
+        $userInfo = self::$userStore->create($create);
+        if(empty($userInfo)){
+            return back();
+        }else{
+            return redirect($data['path']);
+        }
     }
 
     /**
