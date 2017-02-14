@@ -15,6 +15,9 @@ Route::get('/gettoken1', array('as' => 'get_token1', 'uses' => 'Home\QiniuContro
 //支付宝
 Route::resource('/alipay', 'AlipayController');
 
+//OSS存储
+Route::resource('/alioss', 'AliossController');
+
 Route::group(['domain' => "www.safeapp.com", "namespace" => "User"],function(){
     route::resource('/login', 'LoginController');
     route::resource('/register', 'RegisterController');
