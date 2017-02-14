@@ -25,3 +25,8 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+
+阿里大于配置：
+ALISMS_APPLEY=23334051
+ALISMS_APPSECTET=0ef4782b13b22361d6e9783839dfc5e8
