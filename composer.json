@@ -13,7 +13,8 @@
         "phpoffice/phpexcel": "^1.8",
         "gregwar/captcha": "^1.1",
         "qiniu/php-sdk": "^7.1",
-        "barryvdh/laravel-ide-helper": "^2.2"
+        "barryvdh/laravel-ide-helper": "^2.2",
+        "latrell/alipay": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

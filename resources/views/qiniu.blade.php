@@ -69,11 +69,24 @@
     <div class="content">
         <form action="{{ url('/upload') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
-            <input type="text" name="username">
             <input name="file" type="file" value="图片上传">
+            <input name="captcha" type="text" placeholder="验证码">
+            <a onclick="javascript:re_captcha();">
+                <img src="{{ URL('/code/captcha/1') }}" id="127ddf0de5a04167a9e427d883690ff6">
+            </a>
+            <br>
             <input type="submit" value="确认">
         </form>
     </div>
 </div>
 </body>
+<script src="{{ url('js/jquery-1.12.2.min.js') }}">
+</script>
+<script>
+    function re_captcha() {
+        $url = "{{ URL('/code/captcha') }}";
+        $url = $url + "/" + Math.random();
+        document.getElementById('127ddf0de5a04167a9e427d883690ff6').src = $url;
+    }
+</script>
 </html>

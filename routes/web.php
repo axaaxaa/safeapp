@@ -4,9 +4,16 @@
 Route::resource('/excel', 'ExcelController');
 
 Route::resource('/test', 'TestController@test');
-Route::resource('/code', 'CodeController');
-//七牛上传
+Route::get('/code/captcha/{tmp}', 'CodeController@captcha');
+//七牛上传图片
 route::resource('/upload', 'QiniuController');
+
+//七牛上传文件
+Route::resource('/qiniu', 'Home\QiniuController');
+Route::get('/gettoken1', array('as' => 'get_token1', 'uses' => 'Home\QiniuController@upTokenUrl1'));
+
+//支付宝
+Route::resource('/alipay', 'AlipayController');
 
 Route::group(['domain' => "www.safeapp.com", "namespace" => "User"],function(){
     route::resource('/login', 'LoginController');
@@ -28,7 +35,4 @@ Route::group(['domain' => "admin.safeapp.com", "namespace" => "Admin"],function(
 });
 
 
-//七牛上传
-Route::resource('/qiniu', 'Home\QiniuController');
-Route::get('/gettoken1', array('as' => 'get_token1', 'uses' => 'Home\QiniuController@upTokenUrl1'));
 
