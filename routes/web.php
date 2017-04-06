@@ -1,6 +1,5 @@
 <?php
 
-
 Route::resource('/excel', 'ExcelController');
 
 Route::resource('/test', 'TestController@test');
@@ -18,7 +17,10 @@ Route::resource('/alipay', 'AlipayController');
 //OSS存储
 Route::resource('/alioss', 'AliossController');
 
-Route::group(['domain' => "www.safeapp.com", "namespace" => "User"],function(){
+//邮件服务
+Route::get('/mail/send', 'MailController@send');
+
+Route::group(['domain' => "www.gvlove.com", "namespace" => "User"],function(){
     route::resource('/login', 'LoginController');
     route::resource('/register', 'RegisterController');
     Route::get('/sendcode', 'UserController@sendcode');
@@ -29,7 +31,7 @@ Route::group(['domain' => "www.safeapp.com", "namespace" => "User"],function(){
     });
 });
 
-Route::group(['domain' => "admin.safeapp.com", "namespace" => "Admin"],function(){
+Route::group(['domain' => "admin.gvlove.com", "namespace" => "Admin"],function(){
     route::resource('/login', 'LoginController');
     route::group(['middleware' => 'AdminMiddleware'],function(){
         route::resource('/', 'IndexController');

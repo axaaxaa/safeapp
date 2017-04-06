@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="./dist/lib/weui.min.css">
     <link rel="stylesheet" href="./dist/css/jquery-weui.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 
 <body ontouchstart>
@@ -50,6 +50,12 @@
                     <input hidden name="path" value="">
                 </div>
             </div>
+            <div class="weui_cell weui_phone_password">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_input" type="password" name="password" placeholder="用户密码">
+                    <input hidden name="path" value="">
+                </div>
+            </div>
             <div class="weui_cell weui_phone_code">
                 <div class="weui_cell_bd weui_cell_primary">
                 </div>
@@ -62,7 +68,7 @@
 
 
 <footer>
-    <a href="https://www.aaaxia.com/">兄弟会 李明霞</a>
+    <a href="https://www.aaaxia.com/">李明霞 17600195424</a>
 </footer>
 
 <style>
@@ -82,7 +88,6 @@
         if((time > 0) && (time < 60)) {
             return 0;
         }
-
         var param = {
             "phone" : $('#tel').val(),
         }
@@ -93,15 +98,16 @@
         }
         console.log(param);
         $.ajax({
-            url: "http://www.safeapp.com/sendcode",
+            url: "https://www.gvlove.com/sendcode",
             type: "get",
             data: param,
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                    sendcode();
-                    if (data.smsResult.result.success){
+                sendcode();
+                if (data.smsResult.result.success){
                     alert('发送成功');
+                    $(".weui_phone_password").css('display', 'block');
                 }else{
                     alert('发送失败');
                 }

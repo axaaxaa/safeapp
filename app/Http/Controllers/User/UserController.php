@@ -143,15 +143,22 @@ class UserController extends Controller
         $client = new Client(new App($config));
         $req    = new AlibabaAliqinFcSmsNumSend;
 
+//        $req->setRecNum($tel)
+//            ->setSmsParam([
+//                'code' => $code
+//            ])
+//            ->setSmsFreeSignName('孙健魁')
+//            ->setSmsTemplateCode('SMS_27590030');
+
         $req->setRecNum($tel)
             ->setSmsParam([
+                'home' => '李明霞的网站',
                 'code' => $code
             ])
-            ->setSmsFreeSignName('孙健魁')
-            ->setSmsTemplateCode('SMS_27590030');
-
+            ->setSmsFreeSignName('李明霞')
+            ->setSmsTemplateCode('SMS_46745115');
         $result = $client->execute($req);
-
+//        dd($result);
         return response()->json(['smsResult'=>$result]);
     }
     /**

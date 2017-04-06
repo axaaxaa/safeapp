@@ -49,7 +49,6 @@ class RegisterController extends Controller
     {
         //
         $data = $request->all();
-        var_dump($data);
         //1.数据过滤
         if(empty($data['user_info'])) return back();
         //2.判断用户是否已存在
@@ -64,9 +63,11 @@ class RegisterController extends Controller
             return back();
         }
         $uuid = Uuid::uuid1()->getHex();
+        $password = md5($data['password'].'limingxia');
         $create = [
             'guid' => $uuid,
             'phone' => $data['user_info'],
+            'password' => $password,
         ];
         $userInfo = self::$userStore->create($create);
         if(empty($userInfo)){

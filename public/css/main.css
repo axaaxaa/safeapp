@@ -384,3 +384,7 @@ a {
   cursor: pointer;
 }
 
+.weui_phone_password{
+  display: none;
+}
+
